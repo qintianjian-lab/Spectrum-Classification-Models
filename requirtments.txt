@@ -1,0 +1,8 @@
+astropy
+pytorch-lightning
+torchmetrics
+torchinfo
+wandb
+tensorboard
+tensorboardX
+scikit-learn
