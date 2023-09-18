@@ -43,6 +43,8 @@ class SpectrumDataset(torch.utils.data.Dataset):
             (torch.zeros(padding_half),
              torch.from_numpy(spectrum).float(),
              torch.zeros(padding_half))).unsqueeze(0)
+        if spectrum.shape[1] < self.spectrum_size:
+            spectrum = torch.cat((spectrum, torch.zeros(1, self.spectrum_size - spectrum.shape[1])), dim=1)
         # z-score
         # spectrum = (spectrum - spectrum.mean()) / spectrum.std()
         # spectrum = (spectrum - spectrum.min()) / (spectrum.max() - spectrum.min())

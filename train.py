@@ -14,14 +14,15 @@ from utils.tools import set_random_seed, check_model_name
 
 
 def train(
-        used_model: str = 'sscnn',
+        used_model: str = '',
         cross_validation_fold_name: str = '',
 ):
-    check_model_name(used_model)
     torch.set_float32_matmul_precision('high')
     set_random_seed(config['random_seed'])
 
-    config['used_model'] = used_model
+    if used_model != '' and used_model is not None:
+        config['used_model'] = used_model
+    check_model_name(config['used_model'])
 
     # devices setting
     precision = config['precision']
@@ -102,7 +103,7 @@ def train(
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
-    parser.add_argument('--used_model', type=str, default='sscnn')
+    parser.add_argument('--used_model', type=str, default='')
     parser.add_argument('--cross_name', type=str, default='')
     opt = parser.parse_args()
     train(
